@@ -1,5 +1,7 @@
 import reflex as rx
 
+from LegendsWebsite.app.components.video_audio_content import content
+
 @rx.page(
     route='/'
 )
@@ -18,6 +20,6 @@ def index() -> rx.Component:
             justify="center",
             min_height="85vh",
         ),
-        rx.logo(),
+        content()
     )
 

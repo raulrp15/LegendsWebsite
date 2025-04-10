@@ -1,25 +1,25 @@
 import reflex as rx
 
-from LegendsWebsite.app.components.video_audio_content import content
+from LegendsWebsite.Styles import *
+from LegendsWebsite.app.components.texts import *
+from LegendsWebsite.app.components.navbar import *
+from LegendsWebsite.app.components.video_audio_content import *
 
 @rx.page(
     route='/'
 )
 
 def index() -> rx.Component:
-    return rx.container(
+    return rx.vstack(
         rx.vstack(
-            rx.heading("Welcome to Reflex!", size="9"),
-            rx.link(
-                rx.button("Check out our docs!"),
-                href="https://reflex.dev/docs/getting-started/introduction/",
-                is_external=True,
-            ),
-            rx.text("Have questions? Join our community on Discord!", size="8", color="yellow"),
-            spacing="5",
-            justify="center",
-            min_height="85vh",
+            rx.heading("Legends of Lithuania", size='9', color=color.pr_1.value, align="center", justify="center",),
+            arrow_selector(),
+            bg=color.pr_2.value,
+            style={"height": "auto", "width": "100%", "border-bottom-left-radius": "5px", "border-bottom-right-radius": "5px"},
+            align="center",
+            padding='2dvh',
         ),
-        content()
+        card(),
+        align="center",
+        justify="between"
     )
-

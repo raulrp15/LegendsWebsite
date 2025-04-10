@@ -5,22 +5,22 @@ from LegendsWebsite.app.components.navbar import PageState
 from LegendsWebsite.app.components.texts import text
 
 class selected_state(rx.State):
-    value:str ='Lithuanian'
+    value: str = 'Lithuanian'
+
     @rx.event
-    def change_value(self, value:str):
-        
+    def change_value(self, value: str):
         self.value = value
 
 def content(video, audio) -> rx.Component:
     return rx.vstack(
+        # Primera sección: audio y selector de idioma
         rx.flex(
             rx.audio(
                 url=(audio + selected_state.value + '.mp3'),
                 controls=True,
                 volume=0.5,
-                align="center",
                 width="45dvh",
-                height="5dvh",
+                height="1dvh",
                 flex="1",
             ),
             rx.select(
@@ -33,6 +33,7 @@ def content(video, audio) -> rx.Component:
             align="center",
             spacing="4",
         ),
+        # Segunda sección: vídeo y texto
         rx.flex(
             rx.box(
                 rx.video(
@@ -43,7 +44,10 @@ def content(video, audio) -> rx.Component:
                     volume=0.01,
                     controls=False,
                     playing=True,
-                    style={"border-radius": "15px", "overflow": "hidden"}
+                    style={
+                        "border-radius": "15px",
+                        "overflow": "hidden"
+                    }
                 ),
                 flex="1",
             ),
@@ -57,13 +61,34 @@ def content(video, audio) -> rx.Component:
             spacing="4",
         ),
         align="center",
+        # Estilos para ocupar toda la pantalla y centrar el contenido
+        style={
+            "width": "100vw",
+            "height": "100vh",
+            "padding": "1rem",
+            "box-sizing": "border-box",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+            "alignItems": "center"
+        }
     )
-
 
 def card() -> rx.Component:
     return rx.card(
-        content(f"/{PageState.index + 1}/{PageState.index + 1}.mp4", f"/{PageState.index + 1}/{PageState.index + 1}_"),
+        content(
+            f"/{PageState.index + 1}/{PageState.index + 1}.mp4",
+            f"/{PageState.index + 1}/{PageState.index + 1}_"
+        ),
         size='1',
         bg=color.th.value,
-        style={"width": "100%"},
+        style={
+            "width": "100vw",
+            "height": "100vh",
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "flex-start",  # Alinea el contenido hacia la parte superior
+            "alignItems": "center",            # Centra horizontalmente si fuera necesario
+            "padding-top": "0"                 # Asegura que no haya espacio extra en el tope
+        }
     )

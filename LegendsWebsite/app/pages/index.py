@@ -1,25 +1,47 @@
 import reflex as rx
 
-from LegendsWebsite.Styles import *
-from LegendsWebsite.app.components.texts import *
-from LegendsWebsite.app.components.navbar import *
-from LegendsWebsite.app.components.video_audio_content import *
+from LegendsWebsite.Styles import color
+from LegendsWebsite.app.components.texts import text
+from LegendsWebsite.app.components.navbar import button_selector, PageState
+from LegendsWebsite.app.components.video_audio_content import card
 
-@rx.page(
-    route='/'
-)
-
+@rx.page(route='/')
 def index() -> rx.Component:
     return rx.vstack(
+        # Encabezado con título y selector de botones
         rx.vstack(
-            rx.heading("Legends of Lithuania", size='9', color=color.pr_1.value, align="center", justify="center",),
-            arrow_selector(),
+            rx.heading(
+                "Legends of Lithuania",
+                size='9',
+                color=color.pr_1.value,
+                align="center",
+                justify="center",
+                style={
+                    "text-shadow": "2px 2px 4px rgba(0,0,0,0.3)",
+                    "margin-bottom": "1rem"
+                }
+            ),
+            button_selector(),
             bg=color.pr_2.value,
-            style={"height": "auto", "width": "100%", "border-bottom-left-radius": "5px", "border-bottom-right-radius": "5px"},
+            style={
+                "width": "100%",
+                "padding": "3dvh 2dvw",
+                "border-bottom-left-radius": "10px",
+                "border-bottom-right-radius": "10px",
+                "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)"
+            },
             align="center",
-            padding='2dvh',
         ),
+        # Componente principal (tarjeta) que agrupa el contenido multimedia y texto.
         card(),
         align="center",
-        justify="between"
+        justify="start",
+        style={
+            "width": "100vw",
+            "min-height": "100vh",
+            "background": color.bg.value if hasattr(color, "bg") else "#f5f5f5",
+            "padding": "1rem",
+            "box-sizing": "border-box",
+            "margin-top": "-3rem"  # Valor negativo para subir el card
+        }
     )

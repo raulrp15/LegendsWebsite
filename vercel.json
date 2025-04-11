@@ -3,6 +3,6 @@
         {"src": "LegendsWebsite.py", "use": "@vercel/python"}
     ],
     "routes": [
-        {"src": "/(.*)", "dest": "LegendsWebsite.py"}
+        {"src": "/.*", "dest": "LegendsWebsite.py"}
     ]
 }

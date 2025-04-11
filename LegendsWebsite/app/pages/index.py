@@ -24,12 +24,13 @@ def index() -> rx.Component:
             button_selector(),
             bg=color.pr_2.value,
             style={
-                "width": "100%",
-                "padding": "3dvh 2dvw",
-                "border-bottom-left-radius": "10px",
-                "border-bottom-right-radius": "10px",
-                "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)"
-            },
+                    "width": "100%",
+                    "padding": "3dvh 2dvw",
+                    "border-bottom-left-radius": "10px",
+                    "border-bottom-right-radius": "10px",
+                    "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)",
+                    **{"margin-top": "2rem"}  # 👈 Aquí se agrega el margen superior
+                },
             align="center",
         ),
         # Componente principal (tarjeta) que agrupa el contenido multimedia y texto.

@@ -20,7 +20,7 @@ def content(video, audio) -> rx.Component:
                 controls=True,
                 volume=0.5,
                 width="45dvh",
-                height="1dvh",
+                height="4dvh",
                 flex="1",
             ),
             rx.select(
@@ -87,8 +87,9 @@ def card() -> rx.Component:
             "height": "100vh",
             "display": "flex",
             "flexDirection": "column",
-            "justifyContent": "flex-start",  # Alinea el contenido hacia la parte superior
-            "alignItems": "center",            # Centra horizontalmente si fuera necesario
-            "padding-top": "0"                 # Asegura que no haya espacio extra en el tope
+            "justifyContent": "flex-start",
+            "alignItems": "flex-start",  # Alineado a la izquierda si deseas eso
+            "padding": "2em"             # Puedes ajustar el espacio interior
         }
     )
+

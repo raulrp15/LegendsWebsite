@@ -1,0 +1,8 @@
+{
+    "builds" : [
+        {"src": "LegendsWebsite.py", "use": "@vercel/python"}
+    ],
+    "routes": [
+        {"src": "/(.*)", "dest": "LegendsWebsite.py"}
+    ]
+}

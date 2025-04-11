@@ -36,21 +36,33 @@ def content(video, audio) -> rx.Component:
         # Segunda sección: vídeo y texto
         rx.flex(
             rx.box(
-                rx.video(
-                    url=video,
-                    width="100%",
-                    loop=True,
-                    muted=False,
-                    volume=0.01,
-                    controls=False,
-                    playing=True,
-                    style={
-                        "border-radius": "15px",
-                        "overflow": "hidden"
-                    }
+                rx.cond(
+                    VideoState.loaded,
+                    rx.video(
+                        url=video,
+                        width="100%",
+                        loop=True,
+                        muted=False,
+                        volume=0.01,
+                        controls=False,
+                        playing=True,
+                        style={
+                            "border-radius": "15px",
+                            "overflow": "hidden"
+                        }
+                    ),
+                    rx.center(
+                        rx.vstack(
+                            rx.spinner(size="3", color=color.pr_1.value),  
+                            rx.text("Cargando video...", color=color.pr_1.value)
+                        ),
+                        width="100%",
+                        height="100%"
+                    )
                 ),
-                flex="1",
+                flex="1"
             ),
+
             rx.box(
                 text(),
                 width="100%",
@@ -72,7 +84,7 @@ def content(video, audio) -> rx.Component:
             "justifyContent": "center",
             "alignItems": "center"
         }
-    )
+    ) 
 
 def card() -> rx.Component:
     return rx.card(
@@ -93,3 +105,10 @@ def card() -> rx.Component:
         }
     )
 
+
+class VideoState(rx.State):
+    loaded: bool = False
+
+    def on_load(self):
+        yield rx.timer(1.5)  # espera simulada de 1.5 segundos
+        self.loaded = True

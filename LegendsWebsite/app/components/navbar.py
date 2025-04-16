@@ -1,19 +1,27 @@
 import reflex as rx
 from LegendsWebsite.Styles import color, size
 
-# Asegúrate de tener 4 contenidos en la lista o de ajustarla según tus necesidades.
+# Lista de títulos para cada contenido.
 content_list = [
     "Deives Urke",
-    "Elbow oak",
-    "Queen Donn Testimony",
-    "Mystery of the Deep"  # Contenido adicional para el botón 4.
+    "Alkūninis ąžuolas",
+    "Karalienės Donn pasakojimas",
+    "Mystery of the Deep"
 ]
 
+# Estado global de la página.
 class PageState(rx.State):
     index: int = 0
+    title: str = content_list[0]  # Valor inicial
 
     def set_index(self, new_index: int):
         self.index = new_index
+        self.title = content_list[new_index]
+
+    @staticmethod
+    def get_page_title() -> str:
+        # Devuelve el título actual; este método se usa en el render para obtener un string primitivo.
+        return PageState.title
 
     @rx.var
     def content(self) -> str:
@@ -42,7 +50,7 @@ class PageState(rx.State):
         return "gray" if self.index == 3 else "transparent"
 
 def button_selector():
-    return rx.hstack(
+    return rx.grid(
         rx.button(
             content_list[0],
             on_click=lambda: PageState.set_index(0),
@@ -63,8 +71,17 @@ def button_selector():
             on_click=lambda: PageState.set_index(3),
             bg=PageState.button_bg_3,
         ),
-        spacing="2",
+        style={
+            "gridTemplateColumns": "repeat(4, 1fr)",     # 4 botones en la misma fila
+            "@media (max-width: 768px)": {
+                "gridTemplateColumns": "repeat(2, 1fr)"  # 2 columnas cuando <=768px
+            },
+            "margin": "0 auto",  # Centra la grilla en horizontal
+            "gap": "0.5rem"      # Ajusta el espacio entre celdas si quieres algo menor
+        },
+        # "spacing" y "padding" reducidos
+        spacing="1",   # Espacio entre los children del grid
         align="center",
         justify="center",
-        padding="2",
+        padding="0.5rem",
     )
